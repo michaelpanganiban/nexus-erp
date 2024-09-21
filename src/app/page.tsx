@@ -1,3 +1,5 @@
+'use client'
+
 import { Container } from '@mui/material'
 import { Login } from './_login/page'
 
@@ -12,6 +14,5 @@ export default function Home () {
       }}>
         <Login />
     </Container>
-
-      )
+  )
 }

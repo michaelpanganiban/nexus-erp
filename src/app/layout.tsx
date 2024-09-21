@@ -3,6 +3,10 @@ import { Roboto } from 'next/font/google';
 import ThemeRegistry from '../theme/Themeregistry';
 import React from 'react';
 import ClientProvider from '@/components/ClientProvider';
+import SessionWrapper from '@/components/SessionWrapper';
+import {NavDrawer} from '@/components/common/nav-drawer';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -20,13 +24,26 @@ export default async function RootLayout ({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang='en'>
-      <ClientProvider>
-        <ThemeRegistry>
-          <body className={roboto.className}>{children}</body>
-        </ThemeRegistry>
-      </ClientProvider>
+      <SessionWrapper>
+        <ClientProvider>
+          <ThemeRegistry>
+            <body className={roboto.className}>
+            {
+              session ? (
+                <NavDrawer>{children}</NavDrawer>
+              ) : (
+                children
+              )
+            }
+            </body>
+          </ThemeRegistry>
+        </ClientProvider>
+      </SessionWrapper>
     </html>
   );
 }
+
+
