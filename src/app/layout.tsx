@@ -4,7 +4,7 @@ import ThemeRegistry from '../theme/Themeregistry';
 import React from 'react';
 import ClientProvider from '@/components/ClientProvider';
 import SessionWrapper from '@/components/SessionWrapper';
-import {NavDrawer} from '@/components/common/nav-drawer';
+import {NavDrawer} from '@/components/common/nav/nav-drawer';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 

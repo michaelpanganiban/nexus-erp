@@ -10,7 +10,7 @@ export const authOptions = {
                 username: { label: 'Username', type: 'text', placeholder: 'Username' },
                 password: { label: 'Password', type: 'password' },
             },
-            async authorize(credentials: Record<'username' | 'password', string> | undefined) {
+            async authorize (credentials: Record<'username' | 'password', string> | undefined) {
                 if (!credentials || !credentials.username || !credentials.password) {
                     console.log('Missing credentials');
                     return null;
@@ -36,7 +36,7 @@ export const authOptions = {
         strategy: 'jwt' as SessionStrategy,
     },
     callbacks: {
-        async jwt({
+        async jwt ({
             token,
             user,
         }: {
@@ -55,7 +55,7 @@ export const authOptions = {
             }
             return token;
         },
-        async session({ session, token }: { session: any; token: any }) {
+        async session ({ session, token }: { session: any; token: any }) {
             if (token?.id) {
                 session.user.id = token.id;
                 session.user.name = token.name;
@@ -63,7 +63,7 @@ export const authOptions = {
             }
             return session;
         },
-        async redirect({ url, baseUrl }: { url: string; baseUrl: string; }) {
+        async redirect ({ url, baseUrl }: { url: string; baseUrl: string; }) {
             // Check if `url` contains the `callbackUrl`
             if (url.includes('callbackUrl')) {
                 // Redirect to the intended page
