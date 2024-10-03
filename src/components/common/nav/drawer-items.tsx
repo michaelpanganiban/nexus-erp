@@ -1,28 +1,47 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import SsidChartIcon from '@mui/icons-material/SsidChart';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 interface DrawerItemsProps {
   open: boolean;
 }
 
 export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
+  // State to keep track of the selected item
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
+
+  // Function to handle item click
+  const handleListItemClick = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   const items = [
-    { text: 'Inbox', icon: <InboxIcon /> },
-    { text: 'Starred', icon: <MailIcon /> },
-    { text: 'Send email', icon: <InboxIcon /> },
-    { text: 'Drafts', icon: <MailIcon /> },
+    { text: 'Dashboard', icon: <SsidChartIcon /> },
+    { text: 'Reports', icon: <ContentPasteIcon /> },
+  ];
+
+  const services = [
+    { text: 'Inventory', icon: <InventoryIcon /> },
+    { text: 'Sales', icon: <AttachMoneyIcon /> },
   ];
 
   return (
     <>
       <List>
-        {items.map((item) => (
-          <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+        {items.map((item, index) => (
+          <ListItem 
+            key={item.text} 
+            disablePadding 
+            sx={{ display: 'block' }}
+            onClick={() => handleListItemClick(index)} // Set active item on click
+          >
             <ListItemButton
+              selected={selectedIndex === index} // Highlight the selected item
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -34,20 +53,33 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
+                  color: selectedIndex === index ? 'primary.main' : 'inherit', // Change icon color if active
                 }}
               >
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText 
+                primary={item.text} 
+                sx={{ 
+                  opacity: open ? 1 : 0,
+                  fontWeight: selectedIndex === index ? 'bold' : 'normal', // Change text weight if active
+                }} 
+              />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        {services.map((item, index) => (
+          <ListItem 
+            key={index + items.length} // Ensure unique keys
+            disablePadding 
+            sx={{ display: 'block' }}
+            onClick={() => handleListItemClick(index + items.length)} // Set active item on click
+          >
             <ListItemButton
+              selected={selectedIndex === index + items.length} // Highlight the selected item
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -59,11 +91,18 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
+                  color: selectedIndex === index + items.length ? 'primary.main' : 'inherit', // Change icon color if active
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText 
+                primary={item.text} 
+                sx={{ 
+                  opacity: open ? 1 : 0,
+                  fontWeight: selectedIndex === index + items.length ? 'bold' : 'normal', // Change text weight if active
+                }} 
+              />
             </ListItemButton>
           </ListItem>
         ))}

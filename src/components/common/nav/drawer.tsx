@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Drawer as MuiDrawer, IconButton, styled, useTheme, Theme, CSSObject } from '@mui/material';
+import { Drawer as MuiDrawer, IconButton, styled, useTheme, Theme, CSSObject, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { DrawerHeader } from './drawer-header';
 import { DrawerProps } from '@/interfaces/drawer';
+import { primaryLight } from '@/theme/overrides';
 
 // Define the drawer width
 const drawerWidth = 240;
@@ -59,6 +60,15 @@ export const DrawerComponent: React.FC<DrawerProps> = ({ open, onClose, children
   return (
     <DrawerStyled variant="permanent" open={open}>
       <DrawerHeader>
+        <Typography sx={{
+          fontWeight: 'bold',
+          color: primaryLight,
+          textAlign: 'center',
+          fontSize: '20px',
+          flexGrow: 1,
+        }}>
+          ERP Nexus
+        </Typography>
         <IconButton onClick={onClose}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
