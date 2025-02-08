@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
-import { Drawer as MuiDrawer, IconButton, styled, useTheme, Theme, CSSObject, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Drawer as MuiDrawer, IconButton, styled, useTheme, Theme, CSSObject, Typography, useMediaQuery } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { DrawerHeader } from './drawer-header';
 import { DrawerProps } from '@/interfaces/drawer';
-import { primaryLight } from '@/theme/overrides';
+import { primaryLight, theme } from '@/theme/overrides';
 
 // Define the drawer width
 const drawerWidth = 240;
@@ -57,8 +57,14 @@ const DrawerStyled = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
 // DrawerComponent with custom props
 export const DrawerComponent: React.FC<DrawerProps> = ({ open, onClose, children }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  useEffect(() => {
+    if (isMobile) {
+      onClose();
+    }
+  }, [isMobile]); 
   return (
-    <DrawerStyled variant="permanent" open={open}>
+    <DrawerStyled variant={isMobile ? 'temporary' : 'permanent'} open={open}>
       <DrawerHeader>
         <Typography sx={{
           fontWeight: 'bold',

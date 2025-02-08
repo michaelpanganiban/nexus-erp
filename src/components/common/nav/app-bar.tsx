@@ -9,6 +9,7 @@ import { primaryDark } from '@/theme/overrides';
 import { AccountCircle, Mail, Notifications } from '@mui/icons-material';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useRouter } from 'next/navigation';
 
 const drawerWidth = 240;
 
@@ -37,6 +38,7 @@ const AppBarStyled = styled(MuiAppBar, {
 }));
 
 export const AppBarComponent: React.FC<AppBarProps> = ({ open, onDrawerOpen }) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -53,6 +55,10 @@ export const AppBarComponent: React.FC<AppBarProps> = ({ open, onDrawerOpen }) =
   const handleLogout = () => {
     handleMenuClose();
     signOut();
+  }
+
+  const handleRedirectToProfile = () => {
+    router.push('/profile')
   }
 
   const renderMenu = (
@@ -72,7 +78,7 @@ export const AppBarComponent: React.FC<AppBarProps> = ({ open, onDrawerOpen }) =
       onClose={handleMenuClose}
     >
       <MenuItem 
-        onClick={handleMenuClose}
+        onClick={handleRedirectToProfile}
         sx={{
           width: '7rem',
           alignItems: 'center',

@@ -6,6 +6,7 @@ import SsidChartIcon from '@mui/icons-material/SsidChart';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { useRouter } from 'next/navigation';
 
 interface DrawerItemsProps {
   open: boolean;
@@ -15,14 +16,17 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
   // State to keep track of the selected item
   const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
 
+  const router = useRouter();
+
   // Function to handle item click
-  const handleListItemClick = (index: number) => {
+  const handleListItemClick = (index: number, page: string) => {
+    router.push(page)
     setSelectedIndex(index);
   };
 
   const items = [
-    { text: 'Dashboard', icon: <SsidChartIcon /> },
-    { text: 'Reports', icon: <ContentPasteIcon /> },
+    { text: 'Dashboard', icon: <SsidChartIcon />, link: '/dashboard' },
+    { text: 'Reports', icon: <ContentPasteIcon />, link: '/' },
   ];
 
   const services = [
@@ -38,7 +42,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
             key={item.text} 
             disablePadding 
             sx={{ display: 'block' }}
-            onClick={() => handleListItemClick(index)} // Set active item on click
+            onClick={() => handleListItemClick(index, item.link)} // Set active item on click
           >
             <ListItemButton
               selected={selectedIndex === index} // Highlight the selected item
@@ -76,7 +80,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
             key={index + items.length} // Ensure unique keys
             disablePadding 
             sx={{ display: 'block' }}
-            onClick={() => handleListItemClick(index + items.length)} // Set active item on click
+            onClick={() => handleListItemClick(index, '/')} // Set active item on click
           >
             <ListItemButton
               selected={selectedIndex === index + items.length} // Highlight the selected item
