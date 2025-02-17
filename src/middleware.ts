@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Define the routes that require authentication
-const protectedRoutes = ['/dashboard', '/profile', '/settings'];
+const protectedRoutes = ['/dashboard', '/profile', '/settings', '/inventory'];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -31,5 +31,5 @@ export async function middleware(req: NextRequest) {
 
 // Configure the matcher to specify which routes to apply the middleware
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/profile/:path*', '/settings/:path*'],
+  matcher: ['/', '/dashboard/:path*', '/profile/:path*', '/settings/:path*','/inventory', '/inventory/:path*'],
 };

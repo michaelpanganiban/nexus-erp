@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import SsidChartIcon from '@mui/icons-material/SsidChart';
-import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { Collapse, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { drawerServices, items } from '@/constants/drawerItems';
+import {KeyboardArrowRight, KeyboardArrowDown} from '@mui/icons-material';
 
 interface DrawerItemsProps {
   open: boolean;
@@ -24,15 +22,13 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
     setSelectedIndex(index);
   };
 
-  const items = [
-    { text: 'Dashboard', icon: <SsidChartIcon />, link: '/dashboard' },
-    { text: 'Reports', icon: <ContentPasteIcon />, link: '/' },
-  ];
-
-  const services = [
-    { text: 'Inventory', icon: <InventoryIcon /> },
-    { text: 'Sales', icon: <AttachMoneyIcon /> },
-  ];
+  const [openService, setOpenService] = useState<{ [key: string]: boolean }>({});
+  const handleClick = (serviceText: string) => {
+    setOpenService((prevState) => ({
+      ...prevState,
+      [serviceText]: !prevState[serviceText],
+    }));
+  };
 
   return (
     <>
@@ -75,12 +71,12 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
       </List>
       <Divider />
       <List>
-        {services.map((item, index) => (
-          <ListItem 
-            key={index + items.length} // Ensure unique keys
+        {drawerServices.map((item, index) => (
+          <ListItem
+            key={index} // Ensure unique keys
             disablePadding 
             sx={{ display: 'block' }}
-            onClick={() => handleListItemClick(index, '/')} // Set active item on click
+            onClick={item.children ? undefined : () => handleListItemClick(index, item.link)} // Set active item on click
           >
             <ListItemButton
               selected={selectedIndex === index + items.length} // Highlight the selected item
@@ -89,6 +85,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
+              onClick={() => handleClick(item.text)}
             >
               <ListItemIcon
                 sx={{
@@ -107,7 +104,27 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                   fontWeight: selectedIndex === index + items.length ? 'bold' : 'normal', // Change text weight if active
                 }} 
               />
+              { item.children.length > 0 && (openService[item.text] ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
             </ListItemButton>
+            { item.children.length > 0 && (
+                <Collapse in={openService[item.text]} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {item.children.map((child) => (
+                      <ListItemButton 
+                        sx={{ pl: 4 }} 
+                        key={child.id} 
+                        onClick={() => handleListItemClick(child.id, child.link)}
+                        selected={selectedIndex === child.id}
+                      >
+                        <ListItemIcon>
+                          {child.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={child.text} />
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Collapse>
+            )}
           </ListItem>
         ))}
       </List>
