@@ -12,7 +12,7 @@ interface DrawerItemsProps {
 
 export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
   // State to keep track of the selected item
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>();
 
   const router = useRouter();
 
@@ -30,6 +30,9 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
     }));
   };
 
+  const path = window.location.pathname;
+  const part =  path.split('/');
+
   return (
     <>
       <List>
@@ -41,7 +44,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
             onClick={() => handleListItemClick(index, item.link)} // Set active item on click
           >
             <ListItemButton
-              selected={selectedIndex === index} // Highlight the selected item
+              selected={selectedIndex === index || path === item.link} // Highlight the selected item
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -104,19 +107,23 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                   fontWeight: selectedIndex === index + items.length ? 'bold' : 'normal', // Change text weight if active
                 }} 
               />
-              { item.children.length > 0 && (openService[item.text] ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
+              { item.children.length > 0 && ((openService[item.text] || part[1] == item.text.toLocaleLowerCase()) ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
             </ListItemButton>
             { item.children.length > 0 && (
-                <Collapse in={openService[item.text]} timeout="auto" unmountOnExit>
+                <Collapse in={(openService[item.text] || part[1] == item.text.toLocaleLowerCase())} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {item.children.map((child) => (
                       <ListItemButton 
                         sx={{ pl: 4 }} 
                         key={child.id} 
                         onClick={() => handleListItemClick(child.id, child.link)}
-                        selected={selectedIndex === child.id}
+                        selected={selectedIndex === child.id  || path === child.link}
                       >
-                        <ListItemIcon>
+                        <ListItemIcon 
+                          sx={{
+                            color: (selectedIndex === child.id  || path === child.link) ? 'primary.main' : 'inherit',
+                          }}
+                        >
                           {child.icon}
                         </ListItemIcon>
                         <ListItemText primary={child.text} />

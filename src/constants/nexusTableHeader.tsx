@@ -1,0 +1,1 @@
+export const UOM = ['UOM ID', 'Unit Of Measurement', 'Symbol'];
