@@ -1,4 +1,4 @@
-import { NexusTable } from '@/components/common/table/page';
+import { CustomTable } from '@/components/common/table/page';
 import { UOM } from '@/constants/nexusTableHeader';
 
 const data = [
@@ -21,7 +21,10 @@ const data = [
 ]
 
 export default function Uom () {
+    const options = {
+        withPagination: false
+    }
     return (
-        <NexusTable header={UOM} body={data}/>
+        <CustomTable header={UOM} body={data} options={options}/>
     );
 }
