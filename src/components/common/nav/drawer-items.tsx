@@ -11,15 +11,20 @@ interface DrawerItemsProps {
 }
 
 export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
+  const path = window.location.pathname;
   // State to keep track of the selected item
-  const [selectedIndex, setSelectedIndex] = useState<number | null>();
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(-1);
+  const [currentPath, setSelectedPath] = useState(path);
 
   const router = useRouter();
 
   // Function to handle item click
   const handleListItemClick = (index: number, page: string) => {
-    router.push(page)
+    console.log('index: ', index)
+    console.log(page)
     setSelectedIndex(index);
+    setSelectedPath(page);
+    router.push(page)
   };
 
   const [openService, setOpenService] = useState<{ [key: string]: boolean }>({});
@@ -30,8 +35,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
     }));
   };
 
-  const path = window.location.pathname;
-  const part =  path.split('/');
+  const part =  currentPath.split('/');
 
   return (
     <>
@@ -44,7 +48,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
             onClick={() => handleListItemClick(index, item.link)} // Set active item on click
           >
             <ListItemButton
-              selected={selectedIndex === index || path === item.link} // Highlight the selected item
+              selected={(selectedIndex === index || currentPath === item.link)} // Highlight the selected item
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
@@ -56,7 +60,7 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
                   justifyContent: 'center',
-                  color: selectedIndex === index ? 'primary.main' : 'inherit', // Change icon color if active
+                  color: (selectedIndex === index || currentPath === item.link) ? 'primary.main' : 'inherit', // Change icon color if active
                 }}
               >
                 {item.icon}
@@ -117,11 +121,11 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
                         sx={{ pl: 4 }} 
                         key={child.id} 
                         onClick={() => handleListItemClick(child.id, child.link)}
-                        selected={selectedIndex === child.id  || path === child.link}
+                        selected={selectedIndex === child.id  || currentPath === child.link}
                       >
                         <ListItemIcon 
                           sx={{
-                            color: (selectedIndex === child.id  || path === child.link) ? 'primary.main' : 'inherit',
+                            color: (selectedIndex === child.id  || currentPath === child.link) ? 'primary.main' : 'inherit',
                           }}
                         >
                           {child.icon}
