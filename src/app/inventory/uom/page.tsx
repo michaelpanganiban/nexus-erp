@@ -1,5 +1,8 @@
+import { PageHeader } from '@/components/common/page/page-header';
 import { CustomTable } from '@/components/common/table/page';
 import { UOM } from '@/constants/nexusTableHeader';
+import ScaleIcon from '@mui/icons-material/Scale';
+import { Divider, Stack } from '@mui/material';
 
 const data = [
     {
@@ -25,6 +28,10 @@ export default function Uom () {
         withPagination: false
     }
     return (
-        <CustomTable header={UOM} body={data} options={options}/>
+        <Stack>
+            <PageHeader icon={ScaleIcon} title={'Unit of Measurements'}/>
+            <Divider  sx={{ m: 2 }} />
+            <CustomTable header={UOM} body={data} options={options}/>
+        </Stack>
     );
 }

@@ -11,8 +11,8 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 export const drawerServices = [
     { 
@@ -98,5 +98,6 @@ export const drawerServices = [
 
 export const items = [
     { text: 'Dashboard', icon: <SsidChartIcon />, link: '/dashboard' },
+    { text: 'Users', icon: <PeopleAltIcon />, link: '/users' },
     { text: 'Reports', icon: <ContentPasteIcon />, link: '/reports' },
   ];
