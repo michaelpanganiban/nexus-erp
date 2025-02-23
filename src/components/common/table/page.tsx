@@ -7,10 +7,10 @@ import { Stack } from '@mui/material';
 import { NexusTable } from './table';
 
 
-export const CustomTable: React.FC<CustomTableInterface> = ({ header, body, options }) => {
+export const CustomTable: React.FC<CustomTableInterface> = ({ header, body, options, buttons }) => {
     return (
         <Stack>
-            <NexusTable header={header} body={body} />
+            <NexusTable header={header} body={body} options={options} buttons={buttons} />
             {options && options.withPagination ? <NexusPagination /> : ''}
         </Stack>
     );

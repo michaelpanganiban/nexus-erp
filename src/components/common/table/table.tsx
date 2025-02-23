@@ -8,18 +8,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TableInterface } from '@/interfaces/table';
-import NexusPagination from './pagination';
-import { Stack } from '@mui/material';
+import { CustomTableInterface } from '@/interfaces/table';
+import { Button, Stack } from '@mui/material';
 
 
-export const NexusTable: React.FC<TableInterface> = ({ header, body }) => {
+export const NexusTable: React.FC<CustomTableInterface> = ({ header, body, options, buttons }) => {
 
     const headerCell = () => {
         return header && header.map((item: string, index: number) => {
             return (
                 <TableCell 
-                    align="left"
+                    align="center"
                     key={index}
                     sx={{
                         backgroundColor: 'primary.main',
@@ -40,9 +39,37 @@ export const NexusTable: React.FC<TableInterface> = ({ header, body }) => {
                     backgroundColor: rowIndex % 2 === 0 ? '#f5f5f5' : '#ffffff', // Alternates row colors
                   }}
             >
-            {row && Object.values(row).map((cell, cellIndex) => (
-              <TableCell key={cellIndex} align="left">{cell}</TableCell>
-            ))}
+            {
+                // table cells
+                row && Object.values(row).map((cell, cellIndex) => (
+                    <TableCell key={cellIndex} align="center">{cell}</TableCell>
+                ))
+            }
+            {
+                // table cells with button
+                options.withButtons && (
+                    <TableCell align="center">
+                      {
+                        buttons?.map((button, btnIndex) => (
+                            <Button
+                                key={btnIndex}
+                                title= {button.label}
+                                variant={button.variant || 'contained'}
+                                size= {button.size || 'small'}
+                                sx={{
+                                    color: button.color || 'commonWhite',
+                                    m: 1
+                                }}
+                                startIcon={button.icon}
+                                onClick={() => button.onClick(row)} // Pass the row to the button
+                            >
+                                {button.label}
+                            </Button>
+                        ))
+                    }
+                    </TableCell>
+                )
+            }
           </TableRow>
         ));
     };
