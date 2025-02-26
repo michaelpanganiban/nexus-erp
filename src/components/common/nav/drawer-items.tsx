@@ -20,8 +20,6 @@ export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
 
   // Function to handle item click
   const handleListItemClick = (index: number, page: string) => {
-    console.log('index: ', index)
-    console.log(page)
     setSelectedIndex(index);
     setSelectedPath(page);
     router.push(page)

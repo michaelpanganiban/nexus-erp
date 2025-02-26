@@ -5,9 +5,8 @@ import { USERS } from '@/constants/nexusTableHeader';
 import { Divider, Stack } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import { PageHeader } from '@/components/common/page/page-header';
-import { commonWhite, primaryDark, warningDark } from '@/theme/overrides';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 export default function Users () {
     const tableData = {
@@ -20,16 +19,25 @@ export default function Users () {
                 id: 1,
                 name: 'John Michael Panganiban',
                 userType: 'Admin',
+                status: 'Active'
             },
             {
                 id: 2,
                 name: 'Sarah Panganiban',
                 userType: 'Supervisor',
+                status: 'Suspended'
             },
             {
                 id: 3,
                 name: 'Matteo Sage Panganiban',
                 userType: 'Clerk',
+                status: 'Active'
+            },
+            {
+                id: 4,
+                name: 'Salvacion Gavillo',
+                userType: 'Clerk',
+                status: 'Inactive'
             },
         ],
         header: USERS,
@@ -37,18 +45,16 @@ export default function Users () {
             {
                 label: 'Edit',
                 onClick: (user: Object) => editUser(user),
-                color: primaryDark,
                 variant: 'outlined' as 'contained' | 'outlined' | 'text',
                 size: 'small' as 'small' | 'medium' | 'large',
-                icon: <EditIcon />
+                icon: <PersonOutlineIcon />
             },
             {
                 label: 'Delete',
                 onClick: (user: Object) => editUser(user),
-                color: warningDark,
                 variant: 'outlined' as 'contained' | 'outlined' | 'text',
                 size: 'small' as 'small' | 'medium' | 'large',
-                icon: <DeleteIcon />
+                icon: <DeleteOutlineIcon />
             }
         ]
     }

@@ -47,3 +47,4 @@ export const successContrast = theme.palette.success.contrastText;
 export const divider = theme.palette.divider;
 export const commonBlack = theme.palette.common.black;
 export const commonWhite = theme.palette.common.white;
+export const grey = theme.palette.grey;
