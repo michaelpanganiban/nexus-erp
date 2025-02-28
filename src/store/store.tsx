@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './features/user/userSlice';
 import authSlice from './features/auth/authSlice';
 import geographicSlice from './features/geographic/geographicSlice';
+import modalSlice from './features/modal/modalSlice';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
     auth: authSlice,
-    geographics: geographicSlice
+    geographics: geographicSlice,
+    modal: modalSlice
   },
 });
 

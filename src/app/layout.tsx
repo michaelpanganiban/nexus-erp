@@ -7,6 +7,7 @@ import SessionWrapper from '@/components/SessionWrapper';
 import {NavDrawer} from '@/components/common/nav/nav-drawer';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { NexusModal } from '@/components/common/modal/page';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -33,7 +34,10 @@ export default async function RootLayout ({
             <body className={roboto.className}>
             {
               session ? (
-                <NavDrawer>{children}</NavDrawer>
+                <div>
+                  <NavDrawer>{children}</NavDrawer>
+                  <NexusModal />
+                </div>
               ) : (
                 children
               )
