@@ -9,6 +9,7 @@ import { closeModal } from '@/store/features/modal/modalSlice';
 import { primaryDark } from '@/theme/overrides';
 import GroupIcon from '@mui/icons-material/Group';
 import useModal from '@/handlers/modal';
+import { ComponentRegistry } from '@/constants/componentRegistry';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -23,6 +24,12 @@ export const NexusModal = () => {
     const dispatch = useDispatch();
     const { handleButtonClick } = useModal();
     const { isOpen, content, modalTitle, buttons, titleIcon } = useSelector((state: RootState) => state.modal);
+    
+    if(!content)
+        return;
+    
+    const Content = ComponentRegistry[content];
+
     const iconMap = {
         Group: <GroupIcon sx={{ verticalAlign: 'middle' }} />,
         // Add other icon mappings as needed
@@ -57,18 +64,7 @@ export const NexusModal = () => {
                     <CloseIcon />
                 </IconButton>
                 <DialogContent dividers>
-                <Typography gutterBottom>
-                    { content }
-                </Typography>
-                <Typography gutterBottom>
-                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-                    Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-                </Typography>
-                <Typography gutterBottom>
-                    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-                    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-                    ullamcorper nulla non metus auctor fringilla.
-                </Typography>
+                    { Content && <Content /> }
                 </DialogContent>
                 <DialogActions>
                     <Stack direction="row" spacing={2}>
@@ -80,7 +76,7 @@ export const NexusModal = () => {
                                     size={item.size}
                                     sx={{
                                         color: item.color,
-                                        backgroundColor: item.backgroundColor
+                                        backgroundColor: item.backgroundColor,
                                     }}
                                     onClick={
                                         () => handleButtonClick(item.action, item)

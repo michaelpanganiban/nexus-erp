@@ -1,7 +1,9 @@
-import { USERS } from '@/constants/nexusTableHeader';
+import { USERS } from '@/enums/nexusTableHeader';
 import { closeModal, openModal } from '@/store/features/modal/modalSlice';
 import { commonWhite, primaryMain } from '@/theme/overrides';
 import { useDispatch } from 'react-redux';
+import { ComponentRegistryInterface } from '@/interfaces/componentRegistry';
+import { ModalStateInterface } from '@/interfaces/modal';
 
 const useUserHandlers = () => {
     const dispatch = useDispatch();
@@ -61,7 +63,6 @@ const useUserHandlers = () => {
      * @param user
      */
     const editUser = (user: Object) => {
-
         const buttons = [
             {
                 label: 'Save Changes',
@@ -72,12 +73,16 @@ const useUserHandlers = () => {
                 color: commonWhite,
             }
         ]
-        const modalDetails = {
-            content: '<b>Hi</b>',
-            title: 'Edit User',
+        
+        const modalDetails: ModalStateInterface = {
+            isOpen: true,
+            content: 'UserFormComponent' as keyof ComponentRegistryInterface,
+            modalTitle: 'Edit User',
             titleIcon: 'Group',
             buttons
         }
+
+        //TODO: use component registry
         dispatch(openModal(modalDetails))
     }
 

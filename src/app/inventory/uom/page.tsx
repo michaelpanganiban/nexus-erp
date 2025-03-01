@@ -1,6 +1,6 @@
 import { PageHeader } from '@/components/common/page/page-header';
 import { CustomTable } from '@/components/common/table/page';
-import { UOM } from '@/constants/nexusTableHeader';
+import { UOM } from '@/enums/nexusTableHeader';
 import ScaleIcon from '@mui/icons-material/Scale';
 import { Divider, Stack } from '@mui/material';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ComponentRegistryInterface } from './componentRegistry'
 
 export interface ButtonModalConfig {
     label?: string,
@@ -11,7 +11,7 @@ export interface ButtonModalConfig {
 
 export interface ModalStateInterface {
     isOpen: boolean,
-    content: React.ReactNode | null,
+    content: keyof ComponentRegistryInterface,
     modalTitle: string | null,
     titleIcon: string | null,
     buttons: ButtonModalConfig[]

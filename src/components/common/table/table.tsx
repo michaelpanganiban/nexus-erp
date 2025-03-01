@@ -124,6 +124,7 @@ export const NexusTable: React.FC<CustomTableInterface> = ({ header, body, optio
                                         onClick={
                                             () => handleButtonClick(button.onClick)
                                         }
+                                        sx={{ p:1 }}
                                     >
                                         <span style={{ marginRight: '8px', color: '#615c5c' }}>{button.icon}</span>
                                         {button.label}
