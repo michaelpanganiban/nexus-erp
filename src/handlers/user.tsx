@@ -4,6 +4,9 @@ import { commonWhite, primaryMain } from '@/theme/overrides';
 import { useDispatch } from 'react-redux';
 import { ComponentRegistryInterface } from '@/interfaces/componentRegistry';
 import { ModalStateInterface } from '@/interfaces/modal';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const useUserHandlers = () => {
     const dispatch = useDispatch();
@@ -48,12 +51,21 @@ const useUserHandlers = () => {
                 onClick: (user: Object) => editUser(user),
                 variant: 'outlined' as 'contained' | 'outlined' | 'text',
                 size: 'small' as 'small' | 'medium' | 'large',
+                icon: <DriveFileRenameOutlineIcon />
             },
             {
                 label: 'Delete',
                 onClick: (user: Object) => deleteUser(user),
                 variant: 'outlined' as 'contained' | 'outlined' | 'text',
                 size: 'small' as 'small' | 'medium' | 'large',
+                icon: <DeleteOutlineIcon />
+            },
+            {
+                label: 'Change Status',
+                onClick: (user: Object) => deleteUser(user),
+                variant: 'outlined' as 'contained' | 'outlined' | 'text',
+                size: 'small' as 'small' | 'medium' | 'large',
+                icon: <AutorenewIcon />
             }
         ]
     }

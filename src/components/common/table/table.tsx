@@ -13,7 +13,6 @@ import { Chip, Divider, IconButton, Menu, MenuItem, Stack } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { grey } from '@mui/material/colors';
 import { useState } from 'react';
-import { errorLight, errorMain, successLight, successMain } from '@/theme/overrides';
 
 
 export const NexusTable: React.FC<CustomTableInterface> = ({ header, body, options, buttons }) => {
@@ -124,7 +123,6 @@ export const NexusTable: React.FC<CustomTableInterface> = ({ header, body, optio
                                         onClick={
                                             () => handleButtonClick(button.onClick)
                                         }
-                                        sx={{ p:1 }}
                                     >
                                         <span style={{ marginRight: '8px', color: '#615c5c' }}>{button.icon}</span>
                                         {button.label}
