@@ -81,8 +81,6 @@ const useUserHandlers = () => {
             titleIcon: 'Group',
             buttons
         }
-
-        //TODO: use component registry
         dispatch(openModal(modalDetails))
     }
 

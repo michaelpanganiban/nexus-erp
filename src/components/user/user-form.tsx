@@ -1,8 +1,9 @@
 'use client'
 
-import { Box, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
+import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Stack, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Dayjs from 'dayjs';
 
 export const UserForm = () => {
     return (
@@ -19,7 +20,14 @@ export const UserForm = () => {
             }}
             autoComplete="off"
         >
-            <Stack margin={2}>
+            <Stack 
+                sx={{
+                    flexDirection: {
+                        sm: 'column',
+                        md: 'row'
+                    }
+                }}
+            >
                 <TextField
                     label="Employee ID"
                     id="employee-id"
@@ -36,10 +44,17 @@ export const UserForm = () => {
                     required
                     helperText="Cannot be edited"
                     disabled />
+                <TextField
+                    label="Role"
+                    id="role"
+                    defaultValue="Admin"
+                    size="small"
+                    required
+                    helperText="Cannot be edited"
+                    disabled />
             </Stack>
             <Stack 
-                spacing={2} 
-                margin={2}
+                margin={1}
                 sx={{
                     flexDirection: {
                         sm: 'column',
@@ -50,21 +65,26 @@ export const UserForm = () => {
                 <TextField
                     label="First Name"
                     id="first-name"
-                    defaultValue="Small"
+                    defaultValue="John Michael"
                     size="small"
                     required
                     helperText="Please enter your first name" />
                 <TextField
                     label="Last Name"
                     id="last-name"
-                    defaultValue="Small"
+                    defaultValue="Panganiban"
                     size="small"
                     required
                     helperText="Please enter your last name" />
+                <TextField
+                    label="Middle Name"
+                    id="middle-name"
+                    defaultValue="Espina"
+                    size="small"
+                    helperText="Please enter your middle name" />
             </Stack>
             <Stack 
-                spacing={2} 
-                margin={2}
+                margin={1}
                 sx={{
                     flexDirection: {
                         sm: 'column',
@@ -75,14 +95,22 @@ export const UserForm = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                         label="Birthdate"
+                        value={Dayjs('2025-03-19')}
                         slotProps={{
                             textField: {
                                 helperText: 'Please enter your birthdate',
                                 size: 'small',
+                                sx: {
+                                    width: {
+                                        xs: '100% !important',
+                                        md: '28% !important',  
+                                    }
+                                },
                             },
-                        }} />
+                        }}
+                    />
                 </LocalizationProvider>
-                <FormControl sx={{paddingLeft: '2%'}}>
+                <FormControl sx={{paddingLeft: '4%'}}>
                     <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
                         row
