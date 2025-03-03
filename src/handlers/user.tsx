@@ -1,6 +1,6 @@
 import { USERS } from '@/enums/nexusTableHeader';
-import { closeModal, openModal } from '@/store/features/modal/modalSlice';
-import { commonWhite, primaryMain } from '@/theme/overrides';
+import { closeModal, openModal, openModalDialog } from '@/store/features/modal/modalSlice';
+import { commonWhite, primaryMain, warningDark } from '@/theme/overrides';
 import { useDispatch } from 'react-redux';
 import { ComponentRegistryInterface } from '@/interfaces/componentRegistry';
 import { ModalStateInterface } from '@/interfaces/modal';
@@ -110,7 +110,14 @@ const useUserHandlers = () => {
      * @param user
      */
     const deleteUser = (user: Object) => {
-        console.log(user)
+        const dialogState = {
+            isDialogOpen: true,
+            dialogTitle: 'Delete User',
+            icon: null,
+            dialogContent: 'Are you sure you want to delete this user?',
+            color: warningDark
+        }
+        dispatch(openModalDialog(dialogState))
     } 
 
     return { editUser, tableData, deleteUser, handleUpdateUser }

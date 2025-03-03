@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, styled, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, styled } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export const NexusModal = () => {
     const dispatch = useDispatch();
     const { handleButtonClick } = useModal();
-    const { isOpen, content, modalTitle, buttons, titleIcon } = useSelector((state: RootState) => state.modal);
+    const { isOpen, content, modalTitle, buttons, titleIcon } = useSelector((state: RootState) => state.modal.modal);
     
     if(!content)
         return;

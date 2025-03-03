@@ -8,6 +8,7 @@ import {NavDrawer} from '@/components/common/nav/nav-drawer';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { NexusModal } from '@/components/common/modal/page';
+import { NexusDialog } from '@/components/common/modal/nexus-dialog';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -37,6 +38,7 @@ export default async function RootLayout ({
                 <div>
                   <NavDrawer>{children}</NavDrawer>
                   <NexusModal />
+                  <NexusDialog />
                 </div>
               ) : (
                 children
