@@ -62,7 +62,7 @@ const useUserHandlers = () => {
             },
             {
                 label: 'Change Status',
-                onClick: (user: Object) => deleteUser(user),
+                onClick: (user: Object) => changeUserStatus(user),
                 variant: 'outlined' as 'contained' | 'outlined' | 'text',
                 size: 'small' as 'small' | 'medium' | 'large',
                 icon: <AutorenewIcon />
@@ -112,14 +112,24 @@ const useUserHandlers = () => {
     const deleteUser = (user: Object) => {
         const dialogState = {
             isDialogOpen: true,
-            dialogTitle: 'Delete User',
-            icon: null,
-            dialogContent: 'Are you sure you want to delete this user?',
+            dialogTitle: 'Delete User Data',
+            icon: 'Delete',
+            dialogContent: 'Are you sure you want to delete this user? This action cannot be undone.',
             color: warningDark
         }
         dispatch(openModalDialog(dialogState))
     } 
 
+    const changeUserStatus = (user: Object) => {
+        const dialogState = {
+            isDialogOpen: true,
+            dialogTitle: 'Change User Status',
+            icon: 'Warning',
+            dialogContent: 'Are you sure you want to change the status of this user?',
+            color: warningDark
+        }
+        dispatch(openModalDialog(dialogState))
+    }
     return { editUser, tableData, deleteUser, handleUpdateUser }
 }
 

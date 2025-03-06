@@ -21,7 +21,7 @@ export interface ModalStateInterface {
 export interface ModalDialogStateInterface {
     isDialogOpen: boolean,
     dialogTitle: string,
-    icon: React.JSX.Element | null,
+    icon: string | null,
     dialogContent: string,
     color: string
 }

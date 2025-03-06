@@ -6,7 +6,7 @@ import { Save, Replay, Home } from '@mui/icons-material';
 import { Alert, Autocomplete, Box, Button, Divider, Paper, Stack, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NexusLoader } from '../common/nexus-loader';
+import { NexusLoader } from '../common/nexusLoader';
 
 export const AddressInformation = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -112,7 +112,7 @@ export const AddressInformation = () => {
                     id="region"
                     freeSolo
                     options={regions ?? []}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => typeof option === 'object' ? option.name : option}
                     value={regions?.find(option => option.code === selectedRegion) || null}
                     onChange={handleRegionChange}
                     renderInput={(params) => <TextField {...params} label="Region" helperText="Please enter your region" />}

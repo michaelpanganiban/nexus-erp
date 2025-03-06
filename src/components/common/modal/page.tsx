@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { closeModal } from '@/store/features/modal/modalSlice';
 import { primaryDark } from '@/theme/overrides';
-import GroupIcon from '@mui/icons-material/Group';
+import { iconMap } from '@/constants/iconMapping';
 import useModal from '@/handlers/modal';
 import { ComponentRegistry } from '@/constants/componentRegistry';
 
@@ -29,11 +29,6 @@ export const NexusModal = () => {
         return;
     
     const Content = ComponentRegistry[content];
-
-    const iconMap = {
-        Group: <GroupIcon sx={{ verticalAlign: 'middle' }} />,
-        // Add other icon mappings as needed
-    };    
     const IconComponent = iconMap[titleIcon as keyof typeof iconMap] || '';
 
     return (
