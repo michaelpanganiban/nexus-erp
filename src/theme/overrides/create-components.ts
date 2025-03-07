@@ -98,6 +98,7 @@ export function createComponents (config: any): Components {
         margin: 'dense',
       },
       styleOverrides: {
+        // eslint-disable-next-line no-unused-vars
         root: ({ ownerState }) => ({
           backgroundColor: common.white,
           fieldset: {

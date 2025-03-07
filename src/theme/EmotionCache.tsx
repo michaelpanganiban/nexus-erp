@@ -15,6 +15,7 @@ export type NextAppDirEmotionCacheProviderProps = {
   /** This is the options passed to createCache() from 'import createCache from '@emotion/cache'' */
   options: Omit<OptionsOfCreateCache, 'insertionPoint'>;
   /** By default <CacheProvider /> from 'import { CacheProvider } from '@emotion/react'' */
+  // eslint-disable-next-line no-unused-vars
   CacheProvider?: (props: {
     value: EmotionCache;
     children: React.ReactNode;
@@ -22,7 +23,7 @@ export type NextAppDirEmotionCacheProviderProps = {
   children: React.ReactNode;
 };
 
-export function NextAppDirEmotionCacheProvider(
+export function NextAppDirEmotionCacheProvider (
   props: NextAppDirEmotionCacheProviderProps
 ) {
   const { options, CacheProvider = DefaultCacheProvider, children } = props;

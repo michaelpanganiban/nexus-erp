@@ -25,7 +25,8 @@ const data = [
 
 export default function Uom () {
     const options = {
-        withPagination: false
+        withPagination: false,
+        withButtons: false
     }
     return (
         <Stack>

@@ -74,6 +74,7 @@ const useUserHandlers = () => {
      * opens modal for editing a user
      * @param user
      */
+    // eslint-disable-next-line no-unused-vars
     const editUser = (user: Object) => {
         const buttons = [
             {
@@ -109,6 +110,7 @@ const useUserHandlers = () => {
      * delete user confirmation
      * @param user
      */
+    // eslint-disable-next-line no-unused-vars
     const deleteUser = (user: Object) => {
         const dialogState = {
             isDialogOpen: true,
@@ -120,6 +122,7 @@ const useUserHandlers = () => {
         dispatch(openModalDialog(dialogState))
     } 
 
+    // eslint-disable-next-line no-unused-vars
     const changeUserStatus = (user: Object) => {
         const dialogState = {
             isDialogOpen: true,

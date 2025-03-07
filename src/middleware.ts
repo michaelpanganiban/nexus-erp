@@ -6,7 +6,7 @@ import type { NextRequest } from 'next/server';
 // Define the routes that require authentication
 const protectedRoutes = ['/dashboard', '/profile', '/settings', '/inventory'];
 
-export async function middleware(req: NextRequest) {
+export async function middleware (req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Extract the session token using getToken from next-auth/jwt

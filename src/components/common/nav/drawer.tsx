@@ -6,7 +6,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { DrawerHeader } from './drawer-header';
 import { DrawerProps } from '@/interfaces/drawer';
-import { primaryLight, theme } from '@/theme/overrides';
+import { primaryLight } from '@/theme/overrides';
 
 // Define the drawer width
 const drawerWidth = 240;
@@ -62,7 +62,7 @@ export const DrawerComponent: React.FC<DrawerProps> = ({ open, onClose, children
     if (isMobile) {
       onClose();
     }
-  }, [isMobile]); 
+  }, [isMobile, onClose]); 
   return (
     <DrawerStyled variant={isMobile ? 'temporary' : 'permanent'} open={open}>
       <DrawerHeader>

@@ -17,7 +17,9 @@ export const AddressInformation = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedMunicipality, setselectedMunicipality] = useState(null);
   const [selectedBarangay, setSelectedBarangay] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [zone, setZone] = useState<string | null>(null);
+  // eslint-disable-next-line no-unused-vars
   const [houseNumber, setHouseNumber] = useState<string | null>(null);
   
   // handle region change
@@ -122,7 +124,7 @@ export const AddressInformation = () => {
                     id="province"
                     freeSolo
                     options={provinces ?? []}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => typeof option === 'object' ? option.name : option}
                     value={provinces?.find(option => option.code === selectedProvince) || null}
                     onChange={handleProvinceChange}
                     renderInput={(params) => <TextField {...params} label="Province" helperText="Please enter your province" />}
@@ -142,7 +144,7 @@ export const AddressInformation = () => {
                     id="city"
                     freeSolo
                     options={cities ?? []}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => typeof option === 'object' ? option.name : option}
                     value={cities?.find(option => option.code === selectedCity) || null}
                     onChange={handleCityChange}
                     renderInput={(params) => <TextField {...params} label="City" helperText="Please enter your city" />}
@@ -152,7 +154,7 @@ export const AddressInformation = () => {
                     id="municipality"
                     freeSolo
                     options={municipalities ?? []}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => typeof option === 'object' ? option.name : option}
                     value={municipalities?.find(option => option.code === selectedMunicipality) || null}
                     onChange={handleMunicipalityChange}
                     renderInput={(params) => <TextField {...params} label="Municipality" helperText="Please enter your municipality" />}
@@ -172,7 +174,7 @@ export const AddressInformation = () => {
                     id="barangay"
                     freeSolo
                     options={barangays ?? []}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => typeof option === 'object' ? option.name : option}
                     value={barangays?.find(option => option.code === selectedBarangay) || null}
                     onChange={handleBarangayChange}
                     renderInput={(params) => <TextField {...params} label="Barangay" helperText="Please enter your barangay" />}

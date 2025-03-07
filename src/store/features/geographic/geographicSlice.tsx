@@ -1,6 +1,6 @@
 import { getCitiesByProvinceCodeService, getMunicipalitiesByProvinceCodeService, getProvincesByRegionCodeService, getRegionListService } from '@/store/actions/services/georgraphicServices';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { GeographicsState } from '@/interfaces/geographics';
+import { BarangayInterface, CityInterface, GeographicsState, MunicipalityInterface, ProvinceInterface, RegionInterface } from '@/interfaces/geographics';
 import { getBarangayByMunicipalityCodeAPI } from '@/store/actions/api/geographicsAPI';
 
 //fetch region data
@@ -91,7 +91,7 @@ export const geographicSlice = createSlice({
         })
         .addCase(fetchRegions.fulfilled, (state, action) => {
             state.loading = false;
-            state.regions = action.payload as unknown as Array<Object> | null; // Store fetched data
+            state.regions = action.payload as RegionInterface[] | null; // Store fetched data
         })
         .addCase(fetchRegions.rejected, (state, action) => {
             state.loading = false;
@@ -106,7 +106,7 @@ export const geographicSlice = createSlice({
         })
         .addCase(fetchProvincesByRegionCode.fulfilled, (state, action) => {
             state.loading = false;
-            state.provinces = action.payload as unknown as Array<Object> | null; // Store fetched data
+            state.provinces = action.payload as ProvinceInterface[] | null; // Store fetched data
         })
         .addCase(fetchProvincesByRegionCode.rejected, (state, action) => {
             state.loading = false;
@@ -121,7 +121,7 @@ export const geographicSlice = createSlice({
         })
         .addCase(fetchCitiesByProvinceCode.fulfilled, (state, action) => {
             state.loading = false;
-            state.cities = action.payload as unknown as Array<Object> | null; // Store fetched data
+            state.cities = action.payload as CityInterface[] | null; // Store fetched data
         })
         .addCase(fetchCitiesByProvinceCode.rejected, (state, action) => {
             state.loading = false;
@@ -136,7 +136,7 @@ export const geographicSlice = createSlice({
         })
         .addCase(fetchMunicipalitiesByProvinceCode.fulfilled, (state, action) => {
             state.loading = false;
-            state.municipalities = action.payload as unknown as Array<Object> | null; // Store fetched data
+            state.municipalities = action.payload as MunicipalityInterface[] | null; // Store fetched data
         })
         .addCase(fetchMunicipalitiesByProvinceCode.rejected, (state, action) => {
             state.loading = false;
@@ -151,7 +151,7 @@ export const geographicSlice = createSlice({
         })
         .addCase(fetchBarangaysByMunicipalityCode.fulfilled, (state, action) => {
             state.loading = false;
-            state.barangays = action.payload as unknown as Array<Object> | null; // Store fetched data
+            state.barangays = action.payload as BarangayInterface[] | null; // Store fetched data
         })
         .addCase(fetchBarangaysByMunicipalityCode.rejected, (state, action) => {
             state.loading = false;

@@ -10,5 +10,6 @@ export interface DrawerProps {
 // Define the custom props for DrawerComponent
 export interface CustomDrawerProps extends MuiDrawerProps {
     open: boolean;
+    // eslint-disable-next-line no-unused-vars
     onClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }

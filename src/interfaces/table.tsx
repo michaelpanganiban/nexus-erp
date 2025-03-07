@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface ButtonConfig {
     label?: string, // Label for the button
+    // eslint-disable-next-line no-unused-vars
     onClick: (row: Record<string, any>) => void,
     color?: string, 
     variant?: 'contained' | 'outlined' | 'text',

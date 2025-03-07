@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box } from '@mui/material';
 
-export default function NexusPagination() {
+export default function NexusPagination () {
   return (
     <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
         <Stack spacing={2}>

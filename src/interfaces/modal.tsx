@@ -1,5 +1,4 @@
 import { ComponentRegistryInterface } from './componentRegistry';
-import React from 'react';
 
 export interface ButtonModalConfig {
     label?: string,
