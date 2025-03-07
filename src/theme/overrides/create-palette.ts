@@ -1,5 +1,6 @@
-import { PaletteOptions, TypeBackground, alpha } from '@mui/material';
+import { PaletteOptions, alpha } from '@mui/material';
 import { error, primary, secondary, info, neutral, success, warning } from './colors';
+import { TypeBackgroundOverrides } from '@/interfaces/theme';
 
 declare module '@mui/material/styles' {
   // eslint-disable-next-line no-unused-vars
@@ -20,8 +21,7 @@ export function createPalette (): PaletteOptions | undefined {
     background: {
       default: '#ffffff',
       secondary: '#f6f9fc',
-      paper: ''
-    } as TypeBackground,
+    } as TypeBackgroundOverrides,
     text: {
       primary: neutral[900],
       secondary: neutral[500],
