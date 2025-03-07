@@ -5,9 +5,22 @@ import { Divider, Stack } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import { PageHeader } from '@/components/common/page/page-header';
 import useUserHandler from '@/handlers/user';
+import { useEffect, useState } from 'react';
+import { NexusLoader } from '@/components/common/nexusLoader';
 
 export default function Users () {
     const { tableData } = useUserHandler();
+    const [loadedData, setLoadedData] = useState(tableData);
+
+    useEffect(() => {
+        if (tableData) {
+            setLoadedData(tableData);
+        }
+    }, [tableData]);
+
+    if (!loadedData) {
+        return <NexusLoader message={'Loading users'} />;
+    }
     
     return (
         <Stack>
