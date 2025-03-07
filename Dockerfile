@@ -1,23 +1,25 @@
-# Use official Node.js image as base image
-FROM node:22.5.1
+# Use a Node.js base image
+FROM node:22.3.1
 
-# Set working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependencies installation
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code into the container
+# Copy the rest of the app
 COPY . .
 
-# Build the Next.js app
-RUN npm run build
+# Build the Next.js app and export it as static files
+RUN npm run export
 
-# Expose the port Next.js will run on
-EXPOSE 3000
+# Serve the static files with a lightweight web server
+# Use Nginx or any other simple HTTP server
+RUN npm install -g serve
+CMD ["serve", "out"]
 
-# Run the Next.js app
-CMD ["npm", "start"]
+# Expose port 5000 to the outside
+EXPOSE 5000
