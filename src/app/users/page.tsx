@@ -1,3 +1,5 @@
+'use client'
+
 import { CustomTable } from '@/components/common/table/page';
 import { Divider, Stack } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
