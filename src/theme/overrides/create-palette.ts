@@ -20,6 +20,7 @@ export function createPalette (): PaletteOptions | undefined {
     background: {
       default: '#ffffff',
       secondary: '#f6f9fc',
+      paper: ''
     } as TypeBackground,
     text: {
       primary: neutral[900],
