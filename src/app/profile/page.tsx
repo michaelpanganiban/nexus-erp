@@ -1,5 +1,3 @@
-'use client'
-
 import { AddressInformation } from '@/components/profile/address-information';
 import { ChangePassword } from '@/components/profile/change-password';
 import { ContactInformation } from '@/components/profile/contact-information';
