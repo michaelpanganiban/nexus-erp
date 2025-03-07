@@ -4,6 +4,7 @@ import { ThemeOptions, createTheme } from '@mui/material';
 import { createPalette } from './create-palette';
 import { createComponents } from './create-components';
 import { createTypography } from './create-typography';
+import { TypeBackgroundOverrides } from '@/interfaces/theme';
 
 const palette = createPalette();
 const components = createComponents({ palette });
@@ -15,11 +16,14 @@ const themeOptions: ThemeOptions = {
   components,
 };
 
+
 export const theme = createTheme(themeOptions);
+const themBackgroundOverride = theme.palette.background as TypeBackgroundOverrides;
+
 //Palette
-export const backgroundSecondary = theme.palette.background.secondary;
-export const backgroundDefault = theme.palette.background.default;
-export const paper = theme.palette.background.paper;
+export const backgroundSecondary = themBackgroundOverride.secondary;
+export const backgroundDefault = themBackgroundOverride.default;
+export const paper = themBackgroundOverride.paper;
 export const primaryMain = theme.palette.primary.main;
 export const primaryLight = theme.palette.primary.light;
 export const primaryDark = theme.palette.primary.dark;
