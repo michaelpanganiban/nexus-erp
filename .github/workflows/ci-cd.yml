@@ -1,4 +1,4 @@
-name: Deploy Next.js App to GitHub Pages
+name: Deploy Nexus ERP App to GitHub Pages with Docker
 
 on:
   push:
@@ -14,21 +14,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.17.0'
+      # Set up Docker
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Build and export the Next.js app
-      - name: Build and export the app
+      # Build Docker image
+      - name: Build Docker image
         run: |
-          npm run build
-          npm run export  # This will create the static files in the 'out' directory
+          docker build -t nexus-erp .
+
+      # Run Docker container
+      - name: Run Docker container
+        run: |
+          docker run -d -p 5000:5000 --name nexus-erp nexus-erp
+
+      # Copy files from Docker container (output files in the container to GitHub Pages)
+      - name: Copy files from Docker container
+        run: |
+          docker cp nexus-erp:/app/out ./out
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
