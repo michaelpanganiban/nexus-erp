@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[702],{91977:function(n,e,s){Promise.resolve().then(s.bind(s,50441))},50441:function(n,e,s){"use strict";s.r(e);var i=s(57437);e.default=()=>(0,i.jsx)("div",{children:(0,i.jsx)("h1",{children:"This is your dashboard"})})}},function(n){n.O(0,[971,117,744],function(){return n(n.s=91977)}),_N_E=n.O()}]);
