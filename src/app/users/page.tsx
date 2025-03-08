@@ -9,19 +9,18 @@ import { useEffect, useState } from 'react';
 import { NexusLoader } from '@/components/common/nexusLoader';
 
 export default function Users () {
+    // const [loadedData, setLoadedData] = useState({});
     const { tableData } = useUserHandler();
-    const [loadedData, setLoadedData] = useState(tableData);
 
-    useEffect(() => {
-        if (tableData) {
-            setLoadedData(tableData);
-        }
-    }, [tableData]);
+    // useEffect(() => {
+    //     if (tableData) {
+    //         setLoadedData(tableData);
+    //     }
+    // }, [tableData]);
 
-    if (!loadedData) {
-        return <NexusLoader message={'Loading users'} />;
-    }
-    
+    // if (!loadedData) {
+    //     return <NexusLoader message={'Loading users'} />;
+    // }
     return (
         <Stack>
             <PageHeader icon={GroupIcon} title={'Users'}/>

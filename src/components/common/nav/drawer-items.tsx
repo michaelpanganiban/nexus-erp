@@ -11,7 +11,8 @@ interface DrawerItemsProps {
 }
 
 export const DrawerItems: React.FC<DrawerItemsProps> = ({ open }) => {
-  const path = window.location.pathname;
+  // const path = window.location.pathname;
+  const path = '/dashboard';
   // State to keep track of the selected item
   const [selectedIndex, setSelectedIndex] = useState<number | null>(-1);
   const [currentPath, setSelectedPath] = useState(path);
