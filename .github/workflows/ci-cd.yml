@@ -45,6 +45,6 @@ jobs:
           git commit -m "Deploy to GitHub Pages"
 
           # Push the changes to the 'gh-pages' branch
-          git push https://github.com/${{ github.repository }}.git `git subtree split --prefix out main`:gh-pages --force
+          git push https://github.com/${{ github.repository }}.git `git subtree split --prefix out main`:refs/heads/gh-pages --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
