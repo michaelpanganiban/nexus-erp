@@ -14,12 +14,13 @@ RUN npm install
 COPY . .
 
 # Build the Next.js app and export it as static files
-RUN npm run export
+RUN npm run build
 
 # Serve the static files with a lightweight web server
-# Use Nginx or any other simple HTTP server
 RUN npm install -g serve
-CMD ["serve", "out"]
+
+# Use 'serve' to serve the static files from 'out/' directory
+CMD ["serve", "out"]  # Serve the 'out' directory
 
 # Expose port 5000 to the outside
 EXPOSE 5000
