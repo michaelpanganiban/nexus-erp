@@ -3,6 +3,7 @@
 const nextConfig = {
     basePath: '/nexus-erp',
     output: 'export',
+    assetPrefix: '/nexus-erp/'
 };
 
 export default nextConfig;
