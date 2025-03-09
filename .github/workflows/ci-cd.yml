@@ -33,6 +33,11 @@ jobs:
         run: |
           docker cp nexus-erp:/app/out ./out
 
+        # Add .nojekyll to prevent Jekyll from processing
+      - name: Add .nojekyll to prevent Jekyll processing
+        run: |
+          touch out/.nojekyll  # Create the .nojekyll file in the 'out' directory
+
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         run: |
