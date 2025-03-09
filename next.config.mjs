@@ -2,7 +2,7 @@
 // next.config.js
 const nextConfig = {
     basePath: '/nexus-erp',
-    // assetPrefix: '/',
+    assetPrefix: '/nexus-erp',
     output: 'export',
 };
 
