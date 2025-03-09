@@ -16,8 +16,6 @@ COPY . .
 # Build the Next.js app and export it as static files
 RUN npm run build
 
-RUN npm run export
-
 # Serve the static files with a lightweight web server
 RUN npm install -g serve
 
