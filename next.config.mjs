@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 // next.config.js
 const nextConfig = {
-    basePath: '/',
-    assetPrefix: '/',
+    basePath: '/nexus-erp',
+    // assetPrefix: '/',
     output: 'export',
 };
 
