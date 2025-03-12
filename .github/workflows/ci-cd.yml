@@ -1,4 +1,4 @@
-name: Deploy Nexus ERP App to GitHub Pages with Docker
+name: Deploy Nexus ERP App to Vercel with Docker
 
 on:
   push:
@@ -26,31 +26,23 @@ jobs:
       # Run Docker container
       - name: Run Docker container
         run: |
-          docker run -d -p 5000:5000 --name nexus-erp nexus-erp
+          docker run -d -p 3000:3000 --name nexus-erp nexus-erp
 
-      # Copy files from Docker container (output files in the container to GitHub Pages)
+      # Copy files from Docker container (output files in the container)
       - name: Copy files from Docker container
         run: |
-          docker cp nexus-erp:/app/out ./out
+          docker cp nexus-erp:/app/.next ./out
 
-        # Add .nojekyll to prevent Jekyll from processing
-      - name: Add .nojekyll to prevent Jekyll processing
+      # Set up Vercel CLI
+      - name: Set up Vercel CLI
         run: |
-          touch out/.nojekyll  # Create the .nojekyll file in the 'out' directory
+          curl -sL https://github.com/vercel/vercel/releases/download/v28.0.0/vercel-28.0.0-linux-x64.tar.gz | tar -xz -C /usr/local/bin
 
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
+      # Deploy to Vercel
+      - name: Deploy to Vercel
         run: |
-          # Configure Git user for commits
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Add and commit the files from the 'out' directory
-          git add -f out
-          git commit -m "Deploy to GitHub Pages"
-
-          # Push the changes to the 'gh-pages' branch
-          git push https://github.com/${{ github.repository }}.git `git subtree split --prefix out main`:refs/heads/gh-pages --force
+          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --confirm
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+

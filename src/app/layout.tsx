@@ -1,12 +1,14 @@
-'use client'
-
+import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import ThemeRegistry from '../theme/Themeregistry';
 import React from 'react';
 import ClientProvider from '@/components/ClientProvider';
 import SessionWrapper from '@/components/SessionWrapper';
-import { SessionProvider } from 'next-auth/react';
-import SessionWrapperComponent from '@/components/common/sessionWrapper';
+import {NavDrawer} from '@/components/common/nav/nav-drawer';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { NexusModal } from '@/components/common/modal/page';
+import { NexusDialog } from '@/components/common/modal/nexusDialog';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -14,26 +16,38 @@ const roboto = Roboto({
   subsets: ['latin'],
 });
 
-export default function RootLayout ({
+export const metadata: Metadata = {
+  title: 'ERP',
+  description: 'The new ERP',
+};
+
+export default async function RootLayout ({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang='en'>
-      <SessionProvider>
-        <SessionWrapper>
-          <ClientProvider>
-            <ThemeRegistry>
-              <body className={roboto.className}>
-                <SessionWrapperComponent>
-                  {children}
-                </SessionWrapperComponent>
-              </body>
-            </ThemeRegistry>
-          </ClientProvider>
-        </SessionWrapper>
-      </SessionProvider>
+      <SessionWrapper>
+        <ClientProvider>
+          <ThemeRegistry>
+            <body className={roboto.className}>
+            {
+              session ? (
+                <div>
+                  <NavDrawer>{children}</NavDrawer>
+                  <NexusModal />
+                  <NexusDialog />
+                </div>
+              ) : (
+                children
+              )
+            }
+            </body>
+          </ThemeRegistry>
+        </ClientProvider>
+      </SessionWrapper>
     </html>
   );
 }
