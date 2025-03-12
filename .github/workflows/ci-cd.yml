@@ -33,10 +33,10 @@ jobs:
         run: |
           docker cp nexus-erp:/app/.next ./out
 
-      # Set up Vercel CLI
-      - name: Set up Vercel CLI
+      # Install Vercel CLI using npm
+      - name: Install Vercel CLI
         run: |
-          curl -sL https://github.com/vercel/vercel/releases/download/v28.0.0/vercel-28.0.0-linux-x64.tar.gz | tar -xz -C /usr/local/bin
+          npm install -g vercel
 
       # Deploy to Vercel
       - name: Deploy to Vercel
@@ -45,4 +45,3 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-
