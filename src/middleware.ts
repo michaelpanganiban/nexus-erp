@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Define the routes that require authentication
-const protectedRoutes = ['/dashboard', '/profile', '/settings', '/inventory'];
+const protectedRoutes = ['/dashboard', '/profile', '/settings', '/inventory', '/users'];
 
 export async function middleware (req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -19,9 +19,10 @@ export async function middleware (req: NextRequest) {
 
   // Check if the requested route is protected
   if (!session && protectedRoutes.some((route) => pathname.startsWith(route))) {
-    // If no session exists, redirect to the login page
-    const loginUrl = new URL('/', req.url);
-    loginUrl.searchParams.set('callbackUrl', req.url); // Save the intended route
+    // If no session exists, redirect to the login page with the current URL as the callback
+    const loginUrl = new URL('/', req.url); // Ensure you're redirecting to the correct login page
+    const callbackUrl = req.nextUrl.href; // Use `href` for the full URL
+    loginUrl.searchParams.set('callbackUrl', callbackUrl); // Don't encode here, NextAuth will handle it
     return NextResponse.redirect(loginUrl);
   }
 
@@ -31,5 +32,5 @@ export async function middleware (req: NextRequest) {
 
 // Configure the matcher to specify which routes to apply the middleware
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/profile/:path*', '/settings/:path*','/inventory', '/inventory/:path*'],
+  matcher: ['/', '/dashboard/:path*', '/profile/:path*', '/settings/:path*', '/inventory', '/inventory/:path*', '/users/:path*'],
 };
