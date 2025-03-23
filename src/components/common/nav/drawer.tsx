@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Drawer as MuiDrawer, IconButton, styled, useTheme, Theme, CSSObject, Typography, useMediaQuery } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -58,13 +58,20 @@ const DrawerStyled = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
 export const DrawerComponent: React.FC<DrawerProps> = ({ open, onClose, children }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
+  const isInitialLoad = useRef(true);
+
   useEffect(() => {
-    if (isMobile) {
-      onClose();
+    if (isInitialLoad.current) {
+      if (isMobile && open) {
+        onClose(); 
+      }
+      isInitialLoad.current = false; // Set it to false after initial load
     }
-  }, [isMobile, onClose]); 
+  }, [isMobile, open, onClose]);
+  
   return (
-    <DrawerStyled variant={isMobile ? 'temporary' : 'permanent'} open={open}>
+    <DrawerStyled variant={open ? 'permanent' : 'temporary'} open={open}>
       <DrawerHeader>
         <Typography sx={{
           fontWeight: 'bold',
