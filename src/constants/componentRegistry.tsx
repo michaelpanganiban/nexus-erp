@@ -1,11 +1,14 @@
-import { UserForm } from '@/components/user/user-form';
+import { EditUserForm } from '@/components/user/edit-user-form';
+import { AddUserForm } from '@/components/user/add-user-form';
 import { ComponentRegistryInterface } from '@/interfaces/componentRegistry';
 
-const UserFormComponent = () => <UserForm />
+const EditUserFormComponent = () => <EditUserForm />
+const AddUserFormComponent = () => <AddUserForm />
 const Default = () => <></>
 
 export const ComponentRegistry: ComponentRegistryInterface = {
-    UserFormComponent,
+    EditUserFormComponent,
+    AddUserFormComponent,
     Default,
   // You can add more components here
 };

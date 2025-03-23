@@ -89,7 +89,7 @@ const useUserHandlers = () => {
         
         const modalDetails: ModalStateInterface = {
             isOpen: true,
-            content: 'UserFormComponent' as keyof ComponentRegistryInterface,
+            content: 'EditUserFormComponent' as keyof ComponentRegistryInterface,
             modalTitle: 'Edit User',
             titleIcon: 'Group',
             buttons
@@ -133,7 +133,42 @@ const useUserHandlers = () => {
         }
         dispatch(openModalDialog(dialogState))
     }
-    return { editUser, tableData, deleteUser, handleUpdateUser }
+
+    /**
+     * open add user modal
+     */
+    const openAddUserModal = () => {
+        const buttons = [
+            {
+                label: 'Save User',
+                action: 'saveAddUser',
+                variant: 'outlined' as 'contained' | 'outlined' | 'text',
+                size: 'medium' as 'small' | 'medium' | 'large',
+                backgroundColor: primaryMain,
+                color: commonWhite,
+            }
+        ]
+        
+        const modalDetails: ModalStateInterface = {
+            isOpen: true,
+            content: 'AddUserFormComponent' as keyof ComponentRegistryInterface,
+            modalTitle: 'New User',
+            titleIcon: 'PersonAddAlt',
+            buttons
+        }
+        dispatch(openModal(modalDetails))
+    }
+
+    /**
+     * handle add user
+     * @param user
+     */
+    const handleAddUser = (user: Object | null) => {
+        console.log('user added', user);
+        dispatch(closeModal());
+    }
+
+    return { editUser, tableData, deleteUser, handleUpdateUser, openAddUserModal, handleAddUser }
 }
 
 export default useUserHandlers;

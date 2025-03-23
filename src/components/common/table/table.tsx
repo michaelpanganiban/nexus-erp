@@ -138,7 +138,7 @@ export const NexusTable: React.FC<CustomTableInterface> = ({ header, body, optio
     };
     return (
         <Stack>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} sx={{ boxShadow: 4 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="UOM">
                     <TableHead>
                         <TableRow>

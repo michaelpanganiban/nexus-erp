@@ -1,7 +1,7 @@
 import useUserHandlers from './user';
 
 const useModal = () => {
-    const { handleUpdateUser } = useUserHandlers();
+    const { handleUpdateUser, handleAddUser } = useUserHandlers();
     /**
      * handleButtonClick - general function for clicking a button
      * @param action - a string identifier that identifies the function to be called
@@ -11,7 +11,10 @@ const useModal = () => {
         switch (action) {
             case 'saveEditUser':
                 handleUpdateUser(item);
-            break;
+                break;
+            case 'saveAddUser':
+                handleAddUser(item);
+                break;
             // Add other cases for different actions as needed
             default:
             break;
