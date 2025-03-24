@@ -90,7 +90,7 @@ export const AddUserForm = () => {
                     id="middle-name"
                     defaultValue=""
                     size="small"
-                    helperText="Please enter your middle name" />
+                    helperText="Please enter your middle name." />
             </Stack>
             <Stack 
                 margin={1}
