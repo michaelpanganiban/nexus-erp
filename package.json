@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.ts": "eslint --fix",
+    "*.tsx": "eslint --fix",
+    "*.css": "prettier --write",
+    "*.md": "prettier --write"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -31,6 +39,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.5.0",
     "next": "^14.2.12",
     "typescript": "^5"
   }

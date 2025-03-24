@@ -1,19 +1,13 @@
-version: '3'
+# version: '3.8'
+
 services:
-  web:
-    image: node:18
-    container_name: nexus_erp
-    working_dir: /app
-    volumes:
-      - ./:/app
+  nextjs:
+    build: .
     ports:
       - "3000:3000"
-    command: sh -c "npm install && npm run dev"
-    networks:
-      - app-network
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
-
-networks:
-  app-network:
-    driver: bridge
+    command: npm run dev

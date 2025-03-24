@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 // next.config.js
 const nextConfig = {
-    // basePath: '/nexus-erp',
-    // assetPrefix: '/nexus-erp/',
-    // output: 'export',
+    webpackDevMiddleware: config => {
+        config.watchOptions = {
+          ...config.watchOptions,
+          poll: 1000,  // Enable polling for changes (useful when file syncing isn't working well)
+          aggregateTimeout: 300,
+        };
+        return config;
+      },
 };
 
 export default nextConfig;
